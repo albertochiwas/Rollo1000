@@ -14,12 +14,24 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var picker: UIPickerView!
     
+    @IBAction func aceptar(sender: UIButton) {
+        let num:Int = Int(display.text!)!
+        if num == oculto {
+            display.text = "Ganaste!"
+            oculto = generaNum(0,9)
+        } else if num < oculto {
+            display.text = "+Grande"
+        } else {
+            display.text = "+chico"
+        }
+    }
+    
     let digits = ["0","1","2","3","4","5","6","7","8","9"]
 
     var oculto: Int = 0
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 3
+        return 1
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -32,15 +44,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         display.text = digits[row]
-        let num:Int = Int(display.text!)!
-        if num == oculto {
-            display.text = "Ganaste!"
-            oculto = generaNum(0,9)
-        } else if num < oculto {
-            display.text = "+Grande"
-        } else {
-            display.text = "+chico"
-        }
     }
     
     override func viewDidLoad() {
